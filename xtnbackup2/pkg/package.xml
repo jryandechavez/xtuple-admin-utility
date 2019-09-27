@@ -1,0 +1,37 @@
+<package id="xtadmin"
+         name="xTuple Backup Manager"
+         developer="xTuple"
+         descrip="xTuple Backup Manager"
+         version="1.0,0"
+         updater="2.2.5">
+  <pkgnotes>xTuple Backup Manager
+
+        Version 1.0, the full text of which (including xTuple-specific Exhibits)
+        is available at www.xtuple.com/CPAL.  By using this software, you agree
+        to be bound by its terms.
+  </pkgnotes>
+
+  <prerequisite type="Query"
+                name="xTuple ERP version">
+    <query>
+      SELECT compareVersion(fetchMetricText('ServerVersion'), '3.7.0') >= 0;
+    </query>
+    <message>
+      This version of the xTuple Backup Manager package only works with xTuple ERP
+      version 3.7.0 or higher.
+    </message>
+  </prerequisite>
+
+
+  <script file="tables/adminlogtable.sql" />
+  <script file="functions/getServerOS.sql" />
+  <script file="functions/scheduledxTupleBackup.sql" />
+
+  <loadappscript file="client/scripts/initMenu.js"              name="initMenu"      order="1"/>
+  <loadappscript file="client/scripts/dspBackupManager.js"      name="dspBackupManager" order="0"/>
+  
+  <loadmetasql file="client/metasql/backupmanager-detail.mql" order="0">xTuple Backup Manager</loadmetasql>
+  
+  <!--// <loadreport  file="client/reports/BackupManager.xml" /> //-->
+
+</package>
